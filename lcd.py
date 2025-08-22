@@ -53,3 +53,44 @@ finally:
     cap.release()
     device.cleanup()
 
+
+
+
+
+
+
+
+
+    import cv2
+
+# カメラを開く (通常は0番)
+cap = cv2.VideoCapture(0)
+
+if not cap.isOpened():
+    print("エラー: カメラを開けませんでした。")
+    exit()
+
+print("カメラの準備ができました。映像ウィンドウが表示されます。")
+print("ウィンドウを選択した状態で 'q' キーを押すと終了します。")
+
+while True:
+    # フレームを1枚読み込む
+    ret, frame = cap.read()
+
+    # フレームが正しく読み込めなかった場合は終了
+    if not ret:
+        print("エラー: フレームを読み込めません。")
+        break
+
+    # フレームをウィンドウに表示
+    cv2.imshow('Camera Test', frame)
+
+    # 'q'キーが押されたらループを抜ける
+    if cv2.waitKey(1) == ord('q'):
+        break
+
+# 後片付け
+cap.release()
+cv2.destroyAllWindows()
+print("プログラムを終了しました。")
+
